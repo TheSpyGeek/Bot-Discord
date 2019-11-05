@@ -1,8 +1,22 @@
 {
-    "name": "Cheese-bot",
-    "version": "1.0.0",
-    "description": "Bot oof the server CheeseLand",
-    "main": "bot.js",
-    "author": "Maxime Isnel",
-    "dependencies": {}
+  "name": "cheese-bot",
+  "version": "1.0.0",
+  "description": "Bot of the server CheeseLand",
+  "main": "bot.js",
+  "author": "Maxime Isnel",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheSpyGeek/Bot-Discord.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheSpyGeek/Bot-Discord/issues"
+  },
+  "homepage": "https://github.com/TheSpyGeek/Bot-Discord#readme"
 }
