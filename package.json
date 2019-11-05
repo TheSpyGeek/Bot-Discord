@@ -1,0 +1,8 @@
+{
+    "name": "Cheese-bot",
+    "version": "1.0.0",
+    "description": "Bot oof the server CheeseLand",
+    "main": "bot.js",
+    "author": "Maxime Isnel",
+    "dependencies": {}
+}
