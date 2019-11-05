@@ -1,1 +1,1 @@
-npm install discord.js winston -save
+npm install discord.js winston ffmpeg ffmpeg-binaries opusscript ytdl-core --save
