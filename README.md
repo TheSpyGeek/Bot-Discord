@@ -6,3 +6,5 @@
 * https://medium.com/davao-js/tutorial-creating-a-simple-discord-bot-9465a2764dc0
 * https://www.digitaltrends.com/gaming/how-to-make-a-discord-bot/
 * https://mtxserv.com/forums/threads/creation-dun-bot-discord-creer-une-application-lui-ajouter-des-permissions.53558/
+* https://thomlom.dev/create-a-discord-bot-under-15-minutes/
+* https://www.toptal.com/chatbot/how-to-make-a-discord-bot
