@@ -4,7 +4,7 @@ var logger = require('winston');
 var auth = require('./auth.json');
 const ffmpeg = require('ffmpeg');
 // pour la musique
-const ytdl = require('ytdl-core');
+//const ytdl = require('ytdl-core');
 
 
 //bot.registry.registerGroup('sound', 'Sound');
@@ -47,12 +47,24 @@ bot.once('reconnecting', () => {
  }
 
 function JoinAndPlayMusic(message){
+
   if(message.member.voiceChannel){
     if(!message.guild.voiceConnection){
       message.member.voiceChannel.join().then(connection => {
+        console.log('Sucessfull join');
       })
       .catch(console.log);
     }
+  } else {
+    message.reply("Tu dois être dans un channel vocal pour faire ça");
+  }
+}
+
+function Leave(message){
+  if(message.member.voiceChannel){
+    message.guild.voiceConnection.disconnect();
+  } else {
+    message.reply("Tu dois être dans un channel vocal pour faire ça");
   }
 }
 
@@ -83,6 +95,10 @@ bot.on('message', async msg => {
             logger.info("Done");
 
 
+            break;
+
+          case 'leave':
+            Leave(msg);
             break;
 
           default: 

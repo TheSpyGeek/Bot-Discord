@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/TheSpyGeek/Bot-Discord/issues"
   },
-  "homepage": "https://github.com/TheSpyGeek/Bot-Discord#readme"
+  "homepage": "https://github.com/TheSpyGeek/Bot-Discord#readme",
+  "devDependencies": {
+    "discord.js": "^11.5.1",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
+    "opusscript": "0.0.7",
+    "ytdl-core": "^1.0.0"
+  }
 }
