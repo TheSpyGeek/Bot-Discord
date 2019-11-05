@@ -4,7 +4,7 @@ var logger = require('winston');
 var auth = require('./auth.json');
 const ffmpeg = require('ffmpeg');
 // pour la musique
-//const ytdl = require('ytdl-core');
+const YTDL = require('ytdl-core');
 
 
 //bot.registry.registerGroup('sound', 'Sound');
@@ -39,19 +39,39 @@ bot.once('reconnecting', () => {
 
  //// PLAY MUSIC //// 
 
+ function Leave(message){
+  if(message.member.voiceChannel){
+    message.guild.voiceConnection.disconnect();
+  } else {
+    message.reply("Tu dois être dans un channel vocal pour faire ça");
+  }
+}
 
-
- function PlayMusic(connection, message){
+ function PlayMusic(connection, music, message){
+   const dispatcher = connection.playStream(YTDL(music, {filter: "audioonly"}));
+  //  const dispatcher = connection.playFile("./cest-honteux-rene.mp3");
+  console.log("Dispatcher launch");
    
     
+   dispatcher.on("end", function(){
+    Leave(message);
+   });
+
+   dispatcher.on('error', e=> {
+    console.log(e);
+   });
+
+   dispatcher.setVolume(0.5);
  }
+
+/// C'est honteux : https://www.youtube.com/watch?v=owtl9rk_UL0
 
 function JoinAndPlayMusic(message){
 
   if(message.member.voiceChannel){
     if(!message.guild.voiceConnection){
       message.member.voiceChannel.join().then(connection => {
-        console.log('Sucessfull join');
+        PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
       })
       .catch(console.log);
     }
@@ -60,13 +80,7 @@ function JoinAndPlayMusic(message){
   }
 }
 
-function Leave(message){
-  if(message.member.voiceChannel){
-    message.guild.voiceConnection.disconnect();
-  } else {
-    message.reply("Tu dois être dans un channel vocal pour faire ça");
-  }
-}
+
 
 
  //// MESSAGE MANAGER /////
