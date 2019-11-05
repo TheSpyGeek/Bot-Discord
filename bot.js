@@ -2,9 +2,13 @@
 const Discord = require('discord.js');
 var logger = require('winston');
 var auth = require('./auth.json');
+const ffmpeg = require('ffmpeg');
 // pour la musique
 const ytdl = require('ytdl-core');
 
+
+//bot.registry.registerGroup('sound', 'Sound');
+//bot.registry.registerDefaults();
 
 ////// INITIALIZING /////
 var bot = new Discord.Client({
@@ -21,7 +25,7 @@ logger.level = 'debug';
 
 
 bot.on('ready', function (evt) {
-    logger.info(`Logged in as: ${bot.user.tag}`);
+    console.log(`Logged in as: ${bot.user.tag}`);
 });
 
 bot.once('reconnecting', () => {
@@ -31,6 +35,26 @@ bot.once('reconnecting', () => {
  bot.once('disconnect', () => {
     logger.info('Disconnect!');
  });
+
+
+ //// PLAY MUSIC //// 
+
+
+
+ function PlayMusic(connection, message){
+   
+    
+ }
+
+function JoinAndPlayMusic(message){
+  if(message.member.voiceChannel){
+    if(!message.guild.voiceConnection){
+      message.member.voiceChannel.join().then(connection => {
+      })
+      .catch(console.log);
+    }
+  }
+}
 
 
  //// MESSAGE MANAGER /////
@@ -46,19 +70,20 @@ bot.on('message', async msg => {
       var args = msg.content.substring(1).split(' ');
       var cmd = args[0];
 
+
       switch(cmd) {
-          // !ping
           case 'ping':
-            msg.channel.send("Pong");
+            msg.reply("Tu me casses les couilles!");
             break;
 
           case 'play':
-              
+          
+            JoinAndPlayMusic(msg);
 
-              logger.info("Done");
+            logger.info("Done");
 
 
-              break;
+            break;
 
           default: 
             msg.channel.send("Je ne connais pas ce fromage.");
