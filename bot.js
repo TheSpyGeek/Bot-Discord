@@ -1,20 +1,22 @@
 
 const Discord = require('discord.js');
+const Commando = require('discord.js-commando');
 var auth = require('./auth.json');
 const ffmpeg = require('ffmpeg');
 // pour la musique
 const YTDL = require('ytdl-core');
 
 
-//bot.registry.registerGroup('sound', 'Sound');
-//bot.registry.registerDefaults();
 
 ////// INITIALIZING /////
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-   
-});
+var bot = new Commando.Client();
+
+// pour la propreté du code
+bot.registry.registerGroup('soundplayer', 'SoundPlayer');
+bot.registry.registerDefaults();
+bot.registry.registerCommandsIn(__dirname + '/commands');
+
+
 
 
 
@@ -33,52 +35,15 @@ bot.once('reconnecting', () => {
  });
 
 
- //// PLAY MUSIC //// 
-
- function Leave(message){
-  if(message.member.voiceChannel){
-    message.guild.voiceConnection.disconnect();
-  } else {
-    message.reply("Tu dois être dans un channel vocal pour faire ça");
-  }
-}
-
- function PlayMusic(connection, music, message){
-  const dispatcher = connection.playStream(YTDL(music, {filter: "audioonly"}));
-   
-    
-   dispatcher.on("end", function(){
-    Leave(message);
-   });
-
-   dispatcher.on('error', e=> {
-    console.log(e);
-   });
-
-   dispatcher.setVolume(0.4);
- }
-
+ 
 /// C'est honteux : https://www.youtube.com/watch?v=owtl9rk_UL0
 
-function JoinAndPlayMusic(message){
-
-  if(message.member.voiceChannel){
-    if(!message.guild.voiceConnection){
-      message.member.voiceChannel.join().then(connection => {
-        PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
-      })
-      .catch(console.log);
-    }
-  } else {
-    message.reply("Tu dois être dans un channel vocal pour faire ça");
-  }
-}
 
 
 
 
  //// MESSAGE MANAGER /////
-
+/*
 bot.on('message', async msg => {
     // si le message provient d'un bot
     if (msg.author.bot) return;
@@ -115,7 +80,7 @@ bot.on('message', async msg => {
        }
 
     }
-});
+});*/
 
 //// SEND MESSAGE TO NEW COMERS
 
