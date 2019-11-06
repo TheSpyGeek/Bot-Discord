@@ -1,6 +1,5 @@
 
 const Discord = require('discord.js');
-var logger = require('winston');
 var auth = require('./auth.json');
 const ffmpeg = require('ffmpeg');
 // pour la musique
@@ -17,23 +16,20 @@ var bot = new Discord.Client({
    
 });
 
-logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, { colorize: true });
-
-logger.level = 'debug';
 
 
 
 bot.on('ready', function (evt) {
     console.log(`Logged in as: ${bot.user.tag}`);
+    console.log("Ready !");
 });
 
 bot.once('reconnecting', () => {
-    logger.info('Reconnecting!');
+    console.info('Reconnecting!');
  });
 
  bot.once('disconnect', () => {
-    logger.info('Disconnect!');
+    console.log('Disconnect!');
  });
 
 
@@ -48,9 +44,7 @@ bot.once('reconnecting', () => {
 }
 
  function PlayMusic(connection, music, message){
-   const dispatcher = connection.playStream(YTDL(music, {filter: "audioonly"}));
-  //  const dispatcher = connection.playFile("./cest-honteux-rene.mp3");
-  console.log("Dispatcher launch");
+  const dispatcher = connection.playStream(YTDL(music, {filter: "audioonly"}));
    
     
    dispatcher.on("end", function(){
@@ -61,7 +55,7 @@ bot.once('reconnecting', () => {
     console.log(e);
    });
 
-   dispatcher.setVolume(0.5);
+   dispatcher.setVolume(0.4);
  }
 
 /// C'est honteux : https://www.youtube.com/watch?v=owtl9rk_UL0
@@ -106,7 +100,7 @@ bot.on('message', async msg => {
           
             JoinAndPlayMusic(msg);
 
-            logger.info("Done");
+            console.log("Done");
 
 
             break;
