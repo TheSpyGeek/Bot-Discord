@@ -9,11 +9,14 @@ const YTDL = require('ytdl-core');
 
 
 ////// INITIALIZING /////
-var bot = new Commando.Client();
+var bot = new Commando.Client({
+  commandPrefix: '!',
+  unknownCommandResponse: false
+});
 
 // pour la propreté du code
 bot.registry.registerGroup('soundplayer', 'SoundPlayer');
-bot.registry.registerDefaults();
+//bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + '/commands');
 
 
@@ -43,7 +46,7 @@ bot.once('reconnecting', () => {
 
 
  //// MESSAGE MANAGER /////
-/*
+
 bot.on('message', async msg => {
     // si le message provient d'un bot
     if (msg.author.bot) return;
@@ -57,22 +60,6 @@ bot.on('message', async msg => {
 
 
       switch(cmd) {
-          case 'ping':
-            msg.reply("Tu me casses les couilles!");
-            break;
-
-          case 'play':
-          
-            JoinAndPlayMusic(msg);
-
-            console.log("Done");
-
-
-            break;
-
-          case 'leave':
-            Leave(msg);
-            break;
 
           default: 
             msg.channel.send("Je ne connais pas ce fromage.");
@@ -80,7 +67,7 @@ bot.on('message', async msg => {
        }
 
     }
-});*/
+});
 
 //// SEND MESSAGE TO NEW COMERS
 
