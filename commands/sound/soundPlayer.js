@@ -2,12 +2,16 @@ const YTDL = require('ytdl-core');
 const Commando = require('discord.js-commando');
 
 
-function JoinAndPlayMusic(message){
+function JoinAndPlayMusic(message, args){
 
   if(message.member.voiceChannel){
     if(!message.guild.voiceConnection){
       message.member.voiceChannel.join().then(connection => {
-        PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
+        if(args == ""){
+          //PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
+        } else {
+          PlayMusic(connection, args, message);
+        }
       })
       .catch(console.log);
     }
@@ -49,7 +53,7 @@ class SoundPlayer extends Commando.Command {
 
     async run(message, args){
 
-        JoinAndPlayMusic(message);
+        JoinAndPlayMusic(message, args);
     }
 
   
