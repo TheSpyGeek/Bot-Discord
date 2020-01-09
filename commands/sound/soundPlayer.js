@@ -8,7 +8,10 @@ function JoinAndPlayMusic(message, args){
     if(!message.guild.voiceConnection){
       message.member.voiceChannel.join().then(connection => {
         if(args == ""){
+          
           //PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
+        }else if(args == "René"){
+          PlayMusic(connection, "https://www.youtube.com/watch?v=owtl9rk_UL0", message);
         } else {
           PlayMusic(connection, args, message);
         }

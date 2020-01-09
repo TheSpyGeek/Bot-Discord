@@ -60,7 +60,9 @@ bot.on('message', async msg => {
 
 
       switch(cmd) {
-
+          case "play": // play music
+          case "leave":
+            break;
           default: 
             msg.channel.send("Je ne connais pas ce fromage.");
             break;
